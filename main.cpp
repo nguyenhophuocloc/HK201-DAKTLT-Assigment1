@@ -98,10 +98,10 @@ void journey(int r, int n, int id, int m, int array[], int size)
 }
 int main()
 {
-    int r = 0;   //random
-    int n = 5;   //TSLG
-    int id = 3;  //char
-    int m = 201; //Mana
+    int r = 0;   //random 0->10
+    int n = 5;   //TSLG 1->99
+    int id = 3;  //character 1->4
+    int m = 201; //Mana 0-999
     int array[MAX_SIZE] = {0, 0};
     int size = 2;
     journey(r, n, id, m, array, size);

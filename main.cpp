@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace std;
 const int MAX_SIZE = 200;
-int FormulaB(int x, int R)
+int FormulaB(int x, int R) //cong thuc b)
 {
     return x % (100 + R);
 }
@@ -98,12 +98,12 @@ void journey(int r, int n, int id, int m, int array[], int size)
 }
 int main()
 {
-    int R = 0;   //random
-    int N = 5;   //TSLG
-    int ID = 3;  //char
-    int M = 201; //Mana
+    int r = 0;   //random
+    int n = 5;   //TSLG
+    int id = 3;  //char
+    int m = 201; //Mana
     int array[MAX_SIZE] = {0, 0};
     int size = 2;
-    journey(R, N, ID, M, array, size);
+    journey(r, n, id, m, array, size);
     return 0;
 }

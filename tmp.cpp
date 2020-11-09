@@ -33,8 +33,32 @@ int getRonMoney(int R)
     return P;
 }
 
+int checkSoCP(int n){
+  int i = 0;
+  while(i*i <= n){
+        if(i*i == n){
+            return 1;
+        }
+        ++i;
+    }
+    return 0;
+}
+
+int vsMuggle(int n)
+{
+    int res;
+    for(int i=1;i<n;i++)
+    {
+        if(checkSoCP(i)==1)
+        {
+            res=i;
+        }
+    }
+    return res;
+}
+
 int main()
 {
-    cout << getRonMoney(7);
+    cout << vsMuggle(101-01);
     return 0;
 }

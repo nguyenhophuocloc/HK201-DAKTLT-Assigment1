@@ -36,12 +36,39 @@ int checkPrimeNumber(int x)
 int getRonMoney(int R)
 {
     int P;
-    for (int i = 0; i < R; i++)
+    for (int i = 1; i < R; i++)
     {
         if (checkPrimeNumber(i) == 1)
             P = i;
     }
     return P;
+}
+
+int checkSoCP(int n)
+{
+    int i = 0;
+    while (i * i <= n)
+    {
+        if (i * i == n)
+        {
+            return 1;
+        }
+        ++i;
+    }
+    return 0;
+}
+
+int vsMuggle(int n)
+{
+    int res;
+    for (int i = 1; i < n; i++)
+    {
+        if (checkSoCP(i) == 1)
+        {
+            res = i;
+        }
+    }
+    return res;
 }
 
 void journey(int r, int n, int id, int m, int array[], int size)
@@ -74,7 +101,9 @@ void journey(int r, int n, int id, int m, int array[], int size)
         HPmax = 777;
     }
     int HPc = HPmax;
-    for (int i = 0; i < size; i++)
+    int i;
+    int Muggle = 0;
+    for (i = 0; i < size; i++)
     {
         if (array[i] == 0) //nhat duoc TSLG
         {
@@ -82,20 +111,20 @@ void journey(int r, int n, int id, int m, int array[], int size)
         }
         else if (array[i] == 1) //noi tru an HPPPPP
         {
-            if (HPc < HPmax)    //neu het mau
+            if (HPc < HPmax) //neu het mau
             {
                 if (id == 3) //Ron
                 {
                     if (r >= 3)
                     {
                         int P = getRonMoney(r);
-                        for(int i=0;i<Mc;i++)
+                        for (int i = 0; i < Mc; i++)
                         {
-                            if(Mc<P)
+                            if (Mc < P)
                             {
                                 break;
                             }
-                            Mc-=P;
+                            Mc -= P;
                             HPc++;
                         }
                     }
@@ -145,8 +174,25 @@ void journey(int r, int n, int id, int m, int array[], int size)
                 }
             }
         }
-        else if (array[i] >= 200 && array[i] <= 299)
+        else if (array[i] >= 200 && array[i] <= 299) //Muggle
         {
+            if (Muggle == 1)
+            {
+                Muggle = 0;
+            }
+            else
+            {
+                int tmp = Mc - (array[i] % 200);
+                if (tmp <= 4)
+                {
+                    Muggle=1;
+                    i-=3;
+                }
+                else if (tmp > 4)
+                {
+                    Mc = vsMuggle(tmp);
+                }
+            }
         }
         else if (array[i] >= 300 && array[i] <= 399)
         {
@@ -181,12 +227,12 @@ void journey(int r, int n, int id, int m, int array[], int size)
 }
 int main()
 {
-    int r = 3;  //random 0->10
-    int n = 1;  //TSLG 1->99
-    int id = 3; //character 1->4
-    int m = 5;  //Mana 0-999
-    int array[MAX_SIZE] = {109, 1, 0, 999};
-    int size = 4;
+    int r = 0;  //random 0->10
+    int n = 5;  //TSLG 1->99
+    int id = 2; //character 1->4
+    int m = 0;  //Mana 0-999
+    int array[MAX_SIZE] = {0,0,201,0,999};
+    int size = 5;
     journey(r, n, id, m, array, size);
     return 0;
 }

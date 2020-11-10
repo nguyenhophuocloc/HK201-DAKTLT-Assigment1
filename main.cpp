@@ -158,12 +158,22 @@ void journey(int r, int n, int id, int m, int array[], int size)
                     {
                         continue;
                     }
+                    else
+                    {
+                        Mc += array[i];
+                        Mc = Limit999(Mc);
+                    }
                 }
                 else
                 {
                     if (h1 < h2)
                     {
                         continue;
+                    }
+                    else if (h1 >= h2)
+                    {
+                        Mc += array[i];
+                        Mc = Limit999(Mc);
                     }
                 }
             }
@@ -209,7 +219,15 @@ void journey(int r, int n, int id, int m, int array[], int size)
                     if (tmp <= 4)
                     {
                         Muggle = 1;
-                        i -= 3;
+                        if (i + 1 < 3)
+                        {
+                            cout << 0;
+                            return;
+                        }
+                        else
+                        {
+                            i -= 3;
+                        }
                     }
                     else if (tmp > 4)
                     {
@@ -224,18 +242,22 @@ void journey(int r, int n, int id, int m, int array[], int size)
             int h2 = FormulaB(array[i], r);
             if (h1 < h2)
             {
-                Nc = 0;
+                Nc = 0; //mat TSLG
             }
             else if (h1 >= h2)
             {
                 ammor = 1;
             }
         }
-        else if (array[i] >= 400 && array[i] <= 499)
-        {
-        }
         else if (array[i] >= 500 && array[i] <= 599)
         {
+            int h1 = FormulaB(i + 1, r);
+            int h2 = FormulaB(array[i], r);
+            if (h1 < h2)
+            {
+                HPc -= array[i];
+                int Q;  //mat Q suc manh
+            }
         }
         else if (array[i] == 666)
         {
@@ -263,9 +285,9 @@ int main()
 {
     int r = 0;  //random 0->10
     int n = 2;  //TSLG 1->99
-    int id = 2; //character 1->4
+    int id = 4; //character 1->4
     int m = 11; //Mana 0-999
-    int array[MAX_SIZE] = {0, 309, 0, 0};
+    int array[MAX_SIZE] = {0, 300, 108, 0};
     int size = 4;
     journey(r, n, id, m, array, size);
     return 0;

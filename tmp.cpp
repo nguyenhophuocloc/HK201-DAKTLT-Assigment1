@@ -57,6 +57,11 @@ int vsMuggle(int n)
     return res;
 }
 
+int lossQMagic(int n)
+{
+    
+}
+
 int main()
 {
     cout << vsMuggle(101-01);

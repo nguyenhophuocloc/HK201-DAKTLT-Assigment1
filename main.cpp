@@ -103,6 +103,7 @@ void journey(int r, int n, int id, int m, int array[], int size)
     int HPc = HPmax;
     int i;
     int Muggle = 0;
+    int ammor = 0;
     for (i = 0; i < size; i++)
     {
         if (array[i] == 0) //nhat duoc TSLG
@@ -149,53 +150,86 @@ void journey(int r, int n, int id, int m, int array[], int size)
         {
             int h1 = FormulaB(i + 1, r);
             int h2 = FormulaB(array[i], r);
-            if (id == 1)
+            if (ammor == 1)
             {
-                if (checkPrimeNumber(h2) == 1 && h2 > Mc)
+                if (id == 1)
                 {
-                    HPc -= array[i];
+                    if (checkPrimeNumber(h2) == 1 && h2 > Mc)
+                    {
+                        continue;
+                    }
                 }
                 else
                 {
-                    Mc += array[i];
-                    Mc = Limit999(Mc);
+                    if (h1 < h2)
+                    {
+                        continue;
+                    }
                 }
             }
-            else if (id != 1)
+            else if (ammor == 0)
             {
-                if (h1 >= h2)
+                if (id == 1)
                 {
-                    Mc += array[i];
-                    Mc = Limit999(Mc);
+                    if (checkPrimeNumber(h2) == 1 && h2 > Mc)
+                    {
+                        HPc -= array[i];
+                    }
+                    else
+                    {
+                        Mc += array[i];
+                        Mc = Limit999(Mc);
+                    }
                 }
-                else if (h1 < h2)
+                else if (id != 1)
                 {
-                    HPc -= array[i];
+                    if (h1 >= h2)
+                    {
+                        Mc += array[i];
+                        Mc = Limit999(Mc);
+                    }
+                    else if (h1 < h2)
+                    {
+                        HPc -= array[i];
+                    }
                 }
             }
         }
         else if (array[i] >= 200 && array[i] <= 299) //Muggle
         {
-            if (Muggle == 1)
+            if (ammor == 0)
             {
-                Muggle = 0;
-            }
-            else
-            {
-                int tmp = Mc - (array[i] % 200);
-                if (tmp <= 4)
+                if (Muggle == 1)
                 {
-                    Muggle=1;
-                    i-=3;
+                    Muggle = 0;
                 }
-                else if (tmp > 4)
+                else
                 {
-                    Mc = vsMuggle(tmp);
+                    int tmp = Mc - (array[i] % 200);
+                    if (tmp <= 4)
+                    {
+                        Muggle = 1;
+                        i -= 3;
+                    }
+                    else if (tmp > 4)
+                    {
+                        Mc = vsMuggle(tmp);
+                    }
                 }
             }
         }
-        else if (array[i] >= 300 && array[i] <= 399)
+        else if (array[i] >= 300 && array[i] <= 399) //Nhan su
         {
+            int h1 = FormulaB(i + 1, r);
+            int h2 = FormulaB(array[i], r);
+            if (h1 < h2)
+            {
+                Nc = 0;
+            }
+            else if (h1 >= h2)
+            {
+                ammor = 1;
+            }
         }
         else if (array[i] >= 400 && array[i] <= 499)
         {
@@ -228,11 +262,11 @@ void journey(int r, int n, int id, int m, int array[], int size)
 int main()
 {
     int r = 0;  //random 0->10
-    int n = 5;  //TSLG 1->99
+    int n = 2;  //TSLG 1->99
     int id = 2; //character 1->4
-    int m = 0;  //Mana 0-999
-    int array[MAX_SIZE] = {0,0,201,0,999};
-    int size = 5;
+    int m = 11; //Mana 0-999
+    int array[MAX_SIZE] = {0, 309, 0, 0};
+    int size = 4;
     journey(r, n, id, m, array, size);
     return 0;
 }

@@ -100,6 +100,72 @@ int checkPrimeTogether(int a, int b)
     return 0;
 }
 
+void Swapp(int &a, int &b)
+{
+    int tmp = a;
+    a = b;
+    b = tmp;
+}
+
+int lossQTSLG(int *array, int size)
+{
+    int arr[200];
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = array[i];
+    }
+    for (int i = 0; i < size - 1; i++)
+    {
+        for (int j = i + 1; j < size; j++)
+        {
+            if (arr[i] > arr[j])
+            {
+                Swapp(arr[i], arr[j]);
+            }
+        }
+    }
+    bool flag = 0;
+    int S = 0, max = 0;
+    for (int i = 0; i < size - 1; i++)
+    {
+        if (flag == 0 && arr[i] + 1 == arr[i + 1])
+        {
+            flag = 1;
+            S = 2;
+        }
+        else if (flag == 1 && arr[i] + 1 == arr[i + 1])
+        {
+            S++;
+        }
+        else if (arr[i] + 1 != arr[i + 1])
+        {
+            if (flag == 0)
+            {
+                continue;
+            }
+            else if (flag == 1)
+            {
+                flag = 0;
+                if (max < S)
+                {
+                    max = S;
+                }
+                S = 0;
+            }
+        }
+    }
+    if (flag == 0)
+    {
+        return max;
+    }
+    else if (flag == 1)
+    {
+        if (S > max)
+            return S;
+        return max;
+    }
+}
+
 void journey(int r, int n, int id, int m, int array[], int size)
 {
     int isHarry = 0;
@@ -317,11 +383,10 @@ void journey(int r, int n, int id, int m, int array[], int size)
         {
             int h1 = FormulaB(i + 1, r);
             int h2 = FormulaB(array[i], r);
-            if(h1<h2)
+            if (h1 < h2)
             {
-                HPc-=array[i];
-                int Q;  //Loss TSLG
-
+                HPc -= array[i];
+                int Q; //Loss TSLG
             }
         }
         else if (array[i] == 777)

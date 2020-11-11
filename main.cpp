@@ -166,6 +166,32 @@ int lossQTSLG(int *array, int size)
     }
 }
 
+int lossFibonaci(int n)
+{
+    int n0 = 0;
+    int n1 = 1;
+    while (n1 < n)
+    {
+        int tmp = n0;
+        n0 = n1;
+        n1 = tmp + n1;
+    }
+    return n0;
+}
+
+int isPerfectSquare(int x)
+{
+    int s = sqrt(x);
+    return (s * s == x);
+}
+
+int checkFibonacci(int n)
+{
+
+    return isPerfectSquare(5 * n * n + 4) ||
+           isPerfectSquare(5 * n * n - 4);
+}
+
 void journey(int r, int n, int id, int m, int array[], int size)
 {
     int isHarry = 0;
@@ -199,6 +225,7 @@ void journey(int r, int n, int id, int m, int array[], int size)
     int i;
     int Muggle = 0;
     int ammor = 0;
+    int rice = 0;
     for (i = 0; i < size; i++)
     {
         if (array[i] == 0) //nhat duoc TSLG
@@ -409,11 +436,54 @@ void journey(int r, int n, int id, int m, int array[], int size)
                 }
             }
         }
-        else if (array[i] == 777)
+        else if (array[i] == 777) //Severus Snape
         {
+            if (ammor == 0)
+            {
+                if (id == 4)
+                {
+                    cout << -1;
+                    return;
+                }
+                else if (id == 1)
+                {
+                    HPc = 999;
+                    Mc = 999;
+                    rice = 1;
+                }
+                else if (id == 2 || id == 3)
+                {
+                    HPc = lossFibonaci(HPc);
+                }
+            }
         }
-        else if (array[i] == 999)
+        else if (array[i] == 999) //Voldemort
         {
+            if (id == 1 && rice == 1)
+            {
+                HPc = 999;
+                Mc = 999;
+            }
+            else if (checkFibonacci(i + 1) == 1)
+            {
+                int h1 = FormulaB(i + 1, r);
+                int h2 = FormulaB(array[i], r);
+                if (h1 < h2)
+                {
+                    cout << -1;
+                    return;
+                }
+                else if (h1 >= h2)
+                {
+                    HPc = HPmax;
+                    Mc = 999;
+                }
+            }
+            else
+            {
+                cout << -1;
+                return;
+            }
         }
         if (Nc == n) //full TSLG
         {
@@ -430,12 +500,12 @@ void journey(int r, int n, int id, int m, int array[], int size)
 }
 int main()
 {
-    int r = 0;   //random 0->10
-    int n = 5;   //TSLG 1->99
-    int id = 4;  //character 1->4
-    int m = 711; //Mana 0-999
-    int array[MAX_SIZE] = {0, 108, 0, 234, 235, 0, 666, 0, 0, 0, 0, 0, 106, 107, 0};
-    int size = 15;
+    int r = 11;  //random 0->10
+    int n = 2;  //TSLG 1->99
+    int id = 3; //character 1->4
+    int m = 11; //Mana 0-999
+    int array[MAX_SIZE] = {0,198,999,0,777};
+    int size = 5;
     journey(r, n, id, m, array, size);
     return 0;
 }

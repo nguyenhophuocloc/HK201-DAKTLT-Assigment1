@@ -154,13 +154,33 @@ int lossQTSLG(int *array, int size)
         return max;
     }
 }
+int lossFibonaci(int n)
+{
+    int n0 = 0;
+    int n1 = 1;
+    while (n1 < n)
+    {
+        int tmp = n0;
+        n0 = n1;
+        n1 = tmp + n1;
+    }
+    return n0;
+}
+int isPerfectSquare(int x)
+{
+    int s = sqrt(x);
+    return (s * s == x);
+}
 
+int checkFibonacci(int n)
+{
+
+    return isPerfectSquare(5 * n * n + 4) ||
+           isPerfectSquare(5 * n * n - 4);
+}
 int main()
 {
-    int array[1000] = {1,3,5,7,9,11};
-    int size = 6;
-    cout << lossQTSLG(array, size);
-    cout << endl;
+    cout<<checkFibonacci(7);
     /*for (int i = 0; i < size; i++)
     {
         cout << array[i] << " ";

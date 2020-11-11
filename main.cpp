@@ -2,7 +2,7 @@
 #include <string>
 #include <cmath>
 using namespace std;
-const int MAX_SIZE = 200;
+const int MAX_SIZE = 1000;
 
 int FormulaB(int x, int R) //cong thuc b)
 {
@@ -69,6 +69,35 @@ int vsMuggle(int n)
         }
     }
     return res;
+}
+
+int lossQMagic(int n)
+{
+    int Q = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        if (checkPrimeNumber(i) == 1 && n % i == 0)
+        {
+            Q = i;
+        }
+    }
+    return Q;
+}
+
+int gcd(int a, int b)
+{
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+
+int checkPrimeTogether(int a, int b)
+{
+    if (gcd(a, b) == 1)
+    {
+        return 1;
+    }
+    return 0;
 }
 
 void journey(int r, int n, int id, int m, int array[], int size)
@@ -249,18 +278,51 @@ void journey(int r, int n, int id, int m, int array[], int size)
                 ammor = 1;
             }
         }
-        else if (array[i] >= 500 && array[i] <= 599)
+        else if (array[i] >= 500 && array[i] <= 599) //Nguoi khong lo
         {
             int h1 = FormulaB(i + 1, r);
             int h2 = FormulaB(array[i], r);
+            if (id == 2 || id == 4) //Ginny va Her
+            {
+                if (checkPrimeTogether(array[i] % 500, HPc))
+                {
+                    continue;
+                }
+            }
             if (h1 < h2)
             {
                 HPc -= array[i];
-                int Q;  //mat Q suc manh
+                int Q; //mat Q suc manh
+                int tmp = array[i] % 500;
+                if (tmp <= 1)
+                {
+                    Q = 1;
+                }
+                else if (tmp > 1)
+                {
+                    Q = lossQMagic(tmp);
+                }
+                //Tru Q Mana
+                if (Q > Mc)
+                {
+                    Mc = 0;
+                }
+                else
+                {
+                    Mc -= Q;
+                }
             }
         }
-        else if (array[i] == 666)
+        else if (array[i] == 666) //Bell
         {
+            int h1 = FormulaB(i + 1, r);
+            int h2 = FormulaB(array[i], r);
+            if(h1<h2)
+            {
+                HPc-=array[i];
+                int Q;  //Loss TSLG
+
+            }
         }
         else if (array[i] == 777)
         {

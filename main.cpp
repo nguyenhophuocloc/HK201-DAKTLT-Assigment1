@@ -383,10 +383,30 @@ void journey(int r, int n, int id, int m, int array[], int size)
         {
             int h1 = FormulaB(i + 1, r);
             int h2 = FormulaB(array[i], r);
-            if (h1 < h2)
+            if (ammor == 0)
             {
-                HPc -= array[i];
-                int Q; //Loss TSLG
+                if (h1 < h2)
+                {
+                    HPc -= array[i];
+                    int Q = lossQTSLG(array, size); // loss TSLG
+                    if (Nc < Q)
+                    {
+                        Nc = 0;
+                    }
+                    else
+                    {
+                        Nc -= Q;
+                    }
+                }
+                else if (h1 >= h2)
+                {
+                    Mc += array[i];
+                    Mc = Limit999(Mc);
+                    if (Nc >= 1)
+                    {
+                        Nc--;
+                    }
+                }
             }
         }
         else if (array[i] == 777)
@@ -410,12 +430,12 @@ void journey(int r, int n, int id, int m, int array[], int size)
 }
 int main()
 {
-    int r = 0;  //random 0->10
-    int n = 2;  //TSLG 1->99
-    int id = 4; //character 1->4
-    int m = 11; //Mana 0-999
-    int array[MAX_SIZE] = {0, 300, 108, 0};
-    int size = 4;
+    int r = 0;   //random 0->10
+    int n = 5;   //TSLG 1->99
+    int id = 4;  //character 1->4
+    int m = 711; //Mana 0-999
+    int array[MAX_SIZE] = {0, 108, 0, 234, 235, 0, 666, 0, 0, 0, 0, 0, 106, 107, 0};
+    int size = 15;
     journey(r, n, id, m, array, size);
     return 0;
 }

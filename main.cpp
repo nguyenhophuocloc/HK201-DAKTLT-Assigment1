@@ -198,9 +198,9 @@ void journey(int r, int n, int id, int m, int array[], int size)
     int isHermione = 0;
     int isRon = 0;
     int isGinny = 0;
-    int Nc = 0;
-    int Mc = m;
-    int HPmax;
+    int Nc = 0; //TSLG cur
+    int Mc = m; //Mana cur
+    int HPmax; 
     if (id == 1)
     {
         isHarry = 1;
@@ -331,7 +331,7 @@ void journey(int r, int n, int id, int m, int array[], int size)
         {
             if (ammor == 0)
             {
-                if (Muggle == 1)
+                if (Muggle == 1)    //de ne su kien muggle
                 {
                     Muggle = 0;
                 }

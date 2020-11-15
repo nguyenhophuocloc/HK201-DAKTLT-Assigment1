@@ -2,6 +2,7 @@
 #include <string>
 #include <cmath>
 using namespace std;
+
 const int MAX_SIZE = 1000;
 
 int FormulaB(int x, int R) //cong thuc b)
@@ -500,12 +501,12 @@ void journey(int r, int n, int id, int m, int array[], int size)
 }
 int main()
 {
-    int r = 11;  //random 0->10
-    int n = 2;  //TSLG 1->99
+    int r = 0;  //random 0->10
+    int n = 1;  //TSLG 1->99
     int id = 3; //character 1->4
-    int m = 11; //Mana 0-999
-    int array[MAX_SIZE] = {0,198,999,0,777};
-    int size = 5;
+    int m = 201; //Mana 0-999
+    int array[MAX_SIZE] = {190,191,192,194,121,0};
+    int size = 6;
     journey(r, n, id, m, array, size);
     return 0;
 }

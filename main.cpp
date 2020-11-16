@@ -201,7 +201,7 @@ void journey(int r, int n, int id, int m, int array[], int size)
     int isGinny = 0;
     int Nc = 0; //TSLG cur
     int Mc = m; //Mana cur
-    int HPmax; 
+    int HPmax;
     if (id == 1)
     {
         isHarry = 1;
@@ -332,7 +332,7 @@ void journey(int r, int n, int id, int m, int array[], int size)
         {
             if (ammor == 0)
             {
-                if (Muggle == 1)    //de ne su kien muggle
+                if (Muggle == 1) //de ne su kien muggle
                 {
                     Muggle = 0;
                 }
@@ -363,47 +363,53 @@ void journey(int r, int n, int id, int m, int array[], int size)
         {
             int h1 = FormulaB(i + 1, r);
             int h2 = FormulaB(array[i], r);
-            if (h1 < h2)
+            if (ammor == 0)
             {
-                Nc = 0; //mat TSLG
-            }
-            else if (h1 >= h2)
-            {
-                ammor = 1;
+                if (h1 < h2)
+                {
+                    Nc = 0; //mat TSLG
+                }
+                else if (h1 >= h2)
+                {
+                    ammor = 1;
+                }
             }
         }
         else if (array[i] >= 500 && array[i] <= 599) //Nguoi khong lo
         {
             int h1 = FormulaB(i + 1, r);
             int h2 = FormulaB(array[i], r);
-            if (id == 2 || id == 4) //Ginny va Her
+            if (ammor == 0)
             {
-                if (checkPrimeTogether(array[i] % 500, HPc))
+                if (id == 2 || id == 4) //Ginny va Her
                 {
-                    continue;
+                    if (checkPrimeTogether(array[i] % 500, HPc))
+                    {
+                        continue;
+                    }
                 }
-            }
-            if (h1 < h2)
-            {
-                HPc -= array[i];
-                int Q; //mat Q suc manh
-                int tmp = array[i] % 500;
-                if (tmp <= 1)
+                if (h1 < h2)
                 {
-                    Q = 1;
-                }
-                else if (tmp > 1)
-                {
-                    Q = lossQMagic(tmp);
-                }
-                //Tru Q Mana
-                if (Q > Mc)
-                {
-                    Mc = 0;
-                }
-                else
-                {
-                    Mc -= Q;
+                    HPc -= array[i];
+                    int Q; //mat Q suc manh
+                    int tmp = array[i] % 500;
+                    if (tmp <= 1)
+                    {
+                        Q = 1;
+                    }
+                    else if (tmp > 1)
+                    {
+                        Q = lossQMagic(tmp);
+                    }
+                    //Tru Q Mana
+                    if (Q > Mc)
+                    {
+                        Mc = 0;
+                    }
+                    else
+                    {
+                        Mc -= Q;
+                    }
                 }
             }
         }
@@ -501,12 +507,12 @@ void journey(int r, int n, int id, int m, int array[], int size)
 }
 int main()
 {
-    int r = 0;  //random 0->10
-    int n = 1;  //TSLG 1->99
-    int id = 3; //character 1->4
+    int r = 0;   //random 0->10
+    int n = 3;   //TSLG 1->99
+    int id = 3;  //character 1->4
     int m = 201; //Mana 0-999
-    int array[MAX_SIZE] = {190,191,192,194,121,0};
-    int size = 6;
+    int array[MAX_SIZE] = {0, 0, 200, 0};
+    int size = 4;
     journey(r, n, id, m, array, size);
     return 0;
 }
